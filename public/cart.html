@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-title="Shopping Cart - Hayat Flora">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Hayat Flora</title>
+    <meta name="description" content="Review your selected plants and proceed to checkout. Secure shopping with fast delivery options.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/footer-alignment-fix.css">
+    <link rel="stylesheet" href="/css/product-card-fix.css">
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">Hayat Flora</a>
+            
+            <div class="nav-menu">
+                <a href="/#featured" class="nav-item" data-i18n="nav.featured">Featured</a>
+                <a href="/#categories" class="nav-item" data-i18n="nav.categories">Categories</a>
+                <a href="/shop.html" class="nav-item" data-i18n="nav.shop">Shop</a>
+                <a href="/#about" class="nav-item" data-i18n="nav.about">About</a>
+                <a href="/#contact" class="nav-item" data-i18n="nav.contact">Contact</a>
+                <a href="/track-order.html" class="nav-item" data-i18n="nav.track_order">Sipariş Takip</a>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="language-selector">
+                    <button class="lang-button" id="langButton">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span class="lang-text">TR</span>
+                        <span class="lang-arrow">▼</span>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <div class="lang-option" data-lang="tr">
+                            <span class="lang-flag">🇹🇷</span>
+                            <span class="lang-text">Türkçe</span>
+                        </div>
+                        <div class="lang-option" data-lang="az">
+                            <span class="lang-flag">🇦🇿</span>
+                            <span class="lang-text">Azərbaycan</span>
+                        </div>
+                        <div class="lang-option" data-lang="en">
+                            <span class="lang-flag">🇺🇸</span>
+                            <span class="lang-text">English</span>
+                        </div>
+                        <div class="lang-option" data-lang="ru">
+                            <span class="lang-flag">🇷🇺</span>
+                            <span class="lang-text">Русский</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="cart-button active">
+                    🛒
+                    <span class="cart-badge" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb-section">
+        <div class="breadcrumb-parallax-bg"></div>
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="/" data-i18n="nav.home">Home</a>
+                <span class="breadcrumb-separator">›</span>
+                <a href="/shop.html" data-i18n="nav.shop">Shop</a>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-current" data-i18n="cart.title">Shopping Cart</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="cart-bg-elements">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        <div class="container">
+            <div class="cart-header">
+                <h1 class="cart-title" data-i18n="cart.title">Shopping Cart</h1>
+                <div class="cart-count-display" id="cartCountDisplay">
+                    <span id="itemCount">0</span> <span data-i18n="cart.items">items</span>
+                </div>
+            </div>
+
+            <div class="cart-content" id="cartContent">
+                <!-- Cart content will be loaded dynamically -->
+                <div class="cart-loading">
+                    <div class="loading-spinner"></div>
+                    <p data-i18n="common.loading">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommended Products Section -->
+    <section class="recommended-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-i18n="cart.recommended_title">You Might Also Like</h2>
+                <p class="section-subtitle" data-i18n="cart.recommended_subtitle">Complete your garden with these beautiful plants</p>
+            </div>
+            <div class="recommended-products" id="recommendedProducts">
+                <!-- Recommended products will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Hayat Flora</h3>
+                <p data-i18n="footer.tagline">Your trusted partner in bringing nature's beauty to your doorstep. Quality plants, expert care, exceptional service.</p>
+                <div style="margin-top: 1rem;">
+                    <span style="font-size: 1.5rem;">🌿 🌸 🌱</span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 data-i18n="footer.quick_links">Quick Links</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.5rem;"><a href="/" style="color: white; text-decoration: none;" data-i18n="nav.home">Home</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/shop.html" style="color: white; text-decoration: none;" data-i18n="nav.shop">Shop</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/#categories" style="color: white; text-decoration: none;" data-i18n="nav.categories">Categories</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/#about" style="color: white; text-decoration: none;" data-i18n="nav.about">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="footer.copyright">&copy; 2025 Hayat Flora. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/i18n.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/cart.js"></script>
+    
+    <!-- Navigation Script -->
+    <script>
+        // Simple navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const langButton = document.getElementById('langButton');
+            const langDropdown = document.getElementById('langDropdown');
+            
+            // Language configuration
+            const langConfig = {
+                'tr': { flag: '🇹🇷', abbr: 'TR' },
+                'az': { flag: '🇦🇿', abbr: 'AZ' },
+                'en': { flag: '🇺🇸', abbr: 'EN' },
+                'ru': { flag: '🇷🇺', abbr: 'RU' }
+            };
+            
+            // Initialize language from localStorage
+            const savedLang = localStorage.getItem('florist_language') || 'tr';
+            if (langConfig[savedLang]) {
+                langButton.querySelector('.lang-flag').textContent = langConfig[savedLang].flag;
+                langButton.querySelector('.lang-text').textContent = langConfig[savedLang].abbr;
+            }
+            
+            // Toggle language dropdown
+            langButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                langDropdown.classList.toggle('open');
+                const arrow = langButton.querySelector('.lang-arrow');
+                arrow.style.transform = langDropdown.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                langDropdown.classList.remove('open');
+                const arrow = langButton.querySelector('.lang-arrow');
+                arrow.style.transform = 'rotate(0deg)';
+            });
+            
+            // Handle language selection
+            const langOptions = document.querySelectorAll('.lang-option');
+            langOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    const config = langConfig[lang];
+                    
+                    if (config) {
+                        // Update button display
+                        langButton.querySelector('.lang-flag').textContent = config.flag;
+                        langButton.querySelector('.lang-text').textContent = config.abbr;
+                        
+                        // Save to localStorage
+                        localStorage.setItem('florist_language', lang);
+                    }
+                    
+                    // Close dropdown
+                    langDropdown.classList.remove('open');
+                    const arrow = langButton.querySelector('.lang-arrow');
+                    arrow.style.transform = 'rotate(0deg)';
+                    
+                    // Trigger language change if i18n is available
+                    if (window.i18n && window.i18n.setLanguage) {
+                        window.i18n.setLanguage(lang);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

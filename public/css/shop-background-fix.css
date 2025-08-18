@@ -1,0 +1,45 @@
+/* Shop page background fix - match main page styling */
+
+/* Remove green background from shop hero and reduce height by half */
+.shop-hero {
+    background: transparent !important;
+    background-color: #f8f9fa !important; /* Light gray like main page */
+    margin-top: 20px !important; /* Reduce large margin */
+    height: 20vh !important; /* Reduced from 40vh */
+    min-height: 150px !important; /* Reduced from 300px */
+}
+
+/* Update text colors for readability on light background */
+.shop-hero-content {
+    color: #333 !important; /* Dark text instead of white */
+}
+
+.shop-title {
+    color: #2d5a27 !important; /* Green text like main page headings */
+}
+
+.shop-subtitle {
+    color: #666 !important; /* Gray subtitle text */
+}
+
+/* Remove or tone down the parallax background */
+.hero-parallax-bg {
+    display: none !important;
+}
+
+/* Make particles less visible on light background */
+.hero-particles .particle {
+    background: rgba(45, 90, 39, 0.1) !important;
+}
+
+/* Ensure filters section has consistent background */
+.filters-section {
+    background: #fff !important;
+    border-top: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Products section background */
+.products-section {
+    background: #f8f9fa !important;
+}

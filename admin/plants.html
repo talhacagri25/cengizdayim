@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitki Yönetimi - Yönetim Paneli | Hayat Flora</title>
+    <meta name="description" content="Hayat Flora bitki envanteri yönetimi">
+    <link rel="stylesheet" href="/admin/css/admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Admin Layout -->
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-logo">🌿</span>
+                <h2 class="sidebar-title">Hayat Flora</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-item">
+                    <a href="/admin/dashboard.html" class="nav-link">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-text">Ana Sayfa</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/admin/plants.html" class="nav-link active">
+                        <span class="nav-icon">🌱</span>
+                        <span class="nav-text">Bitkiler</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/admin/orders.html" class="nav-link">
+                        <span class="nav-icon">📦</span>
+                        <span class="nav-text">Siparişler</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/admin/categories.html" class="nav-link">
+                        <span class="nav-icon">📁</span>
+                        <span class="nav-text">Kategoriler</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                    <h1 class="page-title">Bitkiler</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" onclick="plantsManager.openAddModal()">
+                        <span>➕</span> Yeni Bitki Ekle
+                    </button>
+                    <div class="user-menu">
+                        <div class="user-avatar" id="userAvatar" onclick="plantsManager.toggleUserMenu()">A</div>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-item" onclick="adminAuth.logout()">
+                                <span class="dropdown-icon">🚪</span>
+                                <span>Çıkış Yap</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h2 class="page-title">Bitki Yönetimi</h2>
+                    <p class="page-description">Bitki envanterinizi yönetin, yeni bitkiler ekleyin, stok seviyelerini güncelleyin</p>
+                </div>
+
+                <!-- Filters and Search -->
+                <div class="plants-filters-section">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="filters-grid">
+                                <div class="filter-group">
+                                    <label class="form-label">Arama</label>
+                                    <div class="search-input">
+                                        <input type="text" id="searchInput" class="form-input" placeholder="Bitkilerde ara..." 
+                                               oninput="plantsManager.handleSearch(this.value)">
+                                        <span class="search-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <div class="filter-group">
+                                    <label class="form-label">Kategori</label>
+                                    <select id="categoryFilter" class="form-select" onchange="plantsManager.handleFilter()">
+                                        <option value="">Tüm Kategoriler</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label class="form-label">Durum</label>
+                                    <select id="statusFilter" class="form-select" onchange="plantsManager.handleFilter()">
+                                        <option value="">Tüm Durumlar</option>
+                                        <option value="available">Mevcut</option>
+                                        <option value="unavailable">Mevcut Değil</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <label class="form-label">Stok Seviyesi</label>
+                                    <select id="stockFilter" class="form-select" onchange="plantsManager.handleFilter()">
+                                        <option value="">Tüm Stok</option>
+                                        <option value="low">Düşük Stok (≤5)</option>
+                                        <option value="normal">Normal Stok (>5)</option>
+                                        <option value="out">Stokta Yok</option>
+                                    </select>
+                                </div>
+                                <div class="filter-group">
+                                    <button class="btn btn-secondary" onclick="plantsManager.clearFilters()">
+                                        Filtreleri Temizle
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div class="plants-loading" id="plantsLoading" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Bitkiler yükleniyor...</p>
+                </div>
+
+                <!-- Plants Grid -->
+                <div class="plants-grid-section">
+                    <div class="section-header">
+                        <h3>Bitki Envanteri</h3>
+                        <div class="view-controls">
+                            <button class="view-btn active" data-view="grid" onclick="plantsManager.changeView('grid')">
+                                <span>⊞</span> Izgara
+                            </button>
+                            <button class="view-btn" data-view="list" onclick="plantsManager.changeView('list')">
+                                <span>☰</span> Liste
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Plants Grid View -->
+                    <div class="plants-grid" id="plantsGrid">
+                        <!-- Plants will be loaded here -->
+                    </div>
+
+                    <!-- Plants List View -->
+                    <div class="plants-list" id="plantsList" style="display: none;">
+                        <div class="card">
+                            <div class="table-container">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Resim</th>
+                                            <th>Ad</th>
+                                            <th>Kategori</th>
+                                            <th>Fiyat</th>
+                                            <th>Stok</th>
+                                            <th>Durum</th>
+                                            <th>İşlemler</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="plantsTableBody">
+                                        <!-- Plants table rows will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        <div class="empty-icon">🌱</div>
+                        <h3>Bitki bulunamadı</h3>
+                        <p>Filtrelerinizi ayarlayın veya ilk bitkinizi ekleyin</p>
+                        <button class="btn btn-primary" onclick="plantsManager.openAddModal()">
+                            İlk Bitkiyi Ekle
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-section" id="paginationSection">
+                    <div class="pagination-info">
+                        <span id="paginationInfo">0 bitkiden 0 tanəsi gösteriliyor</span>
+                    </div>
+                    <div class="pagination-controls" id="paginationControls">
+                        <!-- Pagination buttons will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Plant Add/Edit Modal -->
+    <div class="modal" id="plantModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Yeni Bitki Ekle</h3>
+                <button class="modal-close" onclick="plantsManager.closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="plantForm" class="plant-form" novalidate>
+                    <input type="hidden" id="plantId" name="id">
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="plantName" class="form-label">Bitki Adı *</label>
+                            <input type="text" id="plantName" name="name" class="form-input" required>
+                            <div class="form-error" id="nameError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="plantCategory" class="form-label">Kategori *</label>
+                            <select id="plantCategory" name="category_id" class="form-select" required>
+                                <option value="">Kategori Seçin</option>
+                            </select>
+                            <div class="form-error" id="categoryError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="plantPrice" class="form-label">Fiyat ($) *</label>
+                            <input type="number" id="plantPrice" name="price" class="form-input" 
+                                   min="0" step="0.01" required>
+                            <div class="form-error" id="priceError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="plantStock" class="form-label">Stok Miktarı *</label>
+                            <input type="number" id="plantStock" name="stock_quantity" class="form-input" 
+                                   min="0" required>
+                            <div class="form-error" id="stockError"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="plantStatus" class="form-label">Durum</label>
+                            <select id="plantStatus" name="status" class="form-select">
+                                <option value="available">Mevcut</option>
+                                <option value="unavailable">Mevcut Değil</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="plantCareLevel" class="form-label">Bakım Seviyesi</label>
+                            <select id="plantCareLevel" name="care_level" class="form-select">
+                                <option value="Easy">Kolay</option>
+                                <option value="Medium">Orta</option>
+                                <option value="Hard">Zor</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plantDescription" class="form-label">Açıklama</label>
+                        <textarea id="plantDescription" name="description" class="form-textarea" 
+                                  rows="4" placeholder="Bitkiyi tanımlayın..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plantCareInstructions" class="form-label">Bakım Talimatları</label>
+                        <textarea id="plantCareInstructions" name="care_instructions" class="form-textarea" 
+                                  rows="3" placeholder="Bakım talimatları..."></textarea>
+                    </div>
+
+                    <!-- Image Upload -->
+                    <div class="form-group">
+                        <label class="form-label">Bitki Resmi</label>
+                        <div class="image-upload-section">
+                            <div class="image-preview" id="imagePreview">
+                                <img id="previewImage" src="" alt="Plant preview" style="display: none;">
+                                <div class="upload-placeholder" id="uploadPlaceholder">
+                                    <span class="upload-icon">📷</span>
+                                    <p>Bitki resmi yüklemek için tıklayın</p>
+                                    <small>JPG, PNG, WEBP - Maks 5MB</small>
+                                </div>
+                            </div>
+                            <input type="file" id="plantImage" name="image" class="image-input" 
+                                   accept="image/jpeg,image/png,image/webp" onchange="plantsManager.handleImageUpload(this)">
+                            <div class="image-actions">
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('plantImage').click()">
+                                    Resim Seç
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm" onclick="plantsManager.removeImage()" 
+                                        id="removeImageBtn" style="display: none;">
+                                    Kaldır
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="plantsManager.closeModal()">
+                    İptal
+                </button>
+                <button type="submit" form="plantForm" class="btn btn-primary" id="saveBtn">
+                    <span class="btn-text">Bitkiyi Kaydet</span>
+                    <span class="btn-loader" style="display: none;"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Bitkiyi Sil</h3>
+                <button class="modal-close" onclick="plantsManager.closeDeleteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="delete-confirmation">
+                    <div class="delete-icon">⚠️</div>
+                    <h4>Emin misiniz?</h4>
+                    <p>Bu işlem geri alınamaz. Bitki envanterinizden kalıcı olarak kaldırılacaktır.</p>
+                    <div class="plant-info" id="deleteItem">
+                        <!-- Plant info will be shown here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="plantsManager.closeDeleteModal()">
+                    İptal
+                </button>
+                <button type="button" class="btn btn-danger" onclick="plantsManager.confirmDelete()" id="deleteBtn">
+                    <span class="btn-text">Bitkiyi Sil</span>
+                    <span class="btn-loader" style="display: none;"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Styles -->
+    <style>
+        .plants-filters-section {
+            margin-bottom: 2rem;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .search-input {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .view-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .view-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .view-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .plants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .plant-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .plant-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .plant-image {
+            height: 200px;
+            background: #f5f5f5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .plant-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-available {
+            background: rgba(39, 174, 96, 0.2);
+            color: var(--success-color);
+        }
+
+        .status-unavailable {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--danger-color);
+        }
+
+        .plant-info {
+            padding: 1.5rem;
+        }
+
+        .plant-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .plant-category {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .plant-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .plant-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .plant-stock {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        .stock-low {
+            color: var(--warning-color);
+            font-weight: 500;
+        }
+
+        .stock-out {
+            color: var(--danger-color);
+            font-weight: 500;
+        }
+
+        .plant-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--secondary-color);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .pagination-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .page-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .page-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .image-upload-section {
+            border: 2px dashed #ddd;
+            border-radius: var(--border-radius);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .image-preview {
+            margin-bottom: 1rem;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .upload-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+        }
+
+        .image-input {
+            display: none;
+        }
+
+        .image-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .delete-confirmation {
+            text-align: center;
+        }
+
+        .delete-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--warning-color);
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        .plants-loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .plants-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .pagination-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="/admin/js/admin-auth.js"></script>
+    <script src="/admin/js/plants.js"></script>
+</body>
+</html>

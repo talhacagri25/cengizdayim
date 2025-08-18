@@ -1,0 +1,190 @@
+/* COMPREHENSIVE CLICKABILITY FIX FOR ALL ELEMENTS */
+
+/* Fix z-index stacking for main sections */
+.section {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Featured Plants Section */
+#featured {
+    position: relative !important;
+    z-index: 100 !important;
+}
+
+#featuredPlants {
+    position: relative !important;
+    z-index: 101 !important;
+}
+
+.plants-grid {
+    position: relative !important;
+    z-index: 102 !important;
+}
+
+.plant-card {
+    position: relative !important;
+    z-index: 103 !important;
+    pointer-events: auto !important;
+}
+
+.plant-card a,
+.plant-card button {
+    position: relative !important;
+    z-index: 104 !important;
+    pointer-events: auto !important;
+}
+
+/* Navigation Bar */
+.navbar {
+    position: relative !important;
+    z-index: 9999 !important;
+}
+
+.nav-menu a,
+.nav-actions button,
+.language-selector,
+.cart-button {
+    position: relative !important;
+    z-index: 10000 !important;
+    pointer-events: auto !important;
+}
+
+.lang-dropdown {
+    position: absolute !important;
+    z-index: 10001 !important;
+    pointer-events: auto !important;
+}
+
+.lang-option {
+    pointer-events: auto !important;
+}
+
+/* About Section */
+#about {
+    position: relative !important;
+    z-index: 200 !important;
+}
+
+#about .btn {
+    position: relative !important;
+    z-index: 201 !important;
+    pointer-events: auto !important;
+}
+
+/* Contact Section */
+#contact {
+    position: relative !important;
+    z-index: 300 !important;
+}
+
+/* Footer */
+.footer {
+    position: relative !important;
+    z-index: 400 !important;
+}
+
+.footer a {
+    position: relative !important;
+    z-index: 401 !important;
+    pointer-events: auto !important;
+}
+
+/* Disable pointer events on decorative elements */
+.parallax-bg,
+.parallax-section::before,
+.parallax-section::after,
+.section::before,
+.section::after,
+.hero-particles,
+.particle,
+.floating-element {
+    pointer-events: none !important;
+    z-index: -1 !important;
+}
+
+/* Animation toggle button */
+#animationToggle {
+    position: fixed !important;
+    z-index: 15000 !important;
+    pointer-events: auto !important;
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+    pointer-events: none !important;
+}
+
+/* Override any transform issues on interactive elements */
+a, button, .clickable {
+    transform-style: preserve-3d !important;
+}
+
+/* Ensure all links and buttons are clickable */
+a:not([disabled]),
+button:not([disabled]) {
+    cursor: pointer !important;
+    pointer-events: auto !important;
+}
+
+/* Fix for any absolute positioned overlays */
+*[style*="position: absolute"] {
+    pointer-events: none !important;
+}
+
+/* But keep interactive absolute elements clickable */
+a[style*="position: absolute"],
+button[style*="position: absolute"],
+.clickable[style*="position: absolute"] {
+    pointer-events: auto !important;
+}
+
+/* Prevent animations from blocking clicks */
+@keyframes * {
+    pointer-events: none !important;
+}
+
+/* Fix hover states */
+*:hover {
+    pointer-events: auto !important;
+}
+
+/* Ensure proper stacking context */
+body {
+    position: relative;
+    z-index: 0;
+}
+
+/* Fix any overlay issues from animations */
+.animated,
+.animate-on-scroll {
+    pointer-events: none !important;
+}
+
+.animated > *,
+.animate-on-scroll > * {
+    pointer-events: auto !important;
+}
+
+/* Make sure plant cards are always clickable */
+.plant-card {
+    transform: translateZ(0) !important; /* Create new stacking context */
+}
+
+.plant-card:hover {
+    z-index: 105 !important;
+}
+
+/* Fix for shop buttons in plant cards */
+.plant-card .card-actions {
+    position: relative !important;
+    z-index: 106 !important;
+}
+
+.plant-card .card-actions button,
+.plant-card .card-actions a {
+    position: relative !important;
+    z-index: 107 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+}

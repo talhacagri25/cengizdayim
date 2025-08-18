@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Debug</title>
+</head>
+<body>
+    <h1>Debugging Category Clicks</h1>
+    <div id="test"></div>
+    
+    <script>
+        // Test 1: Check if something is blocking clicks globally
+        document.addEventListener('click', function(e) {
+            console.log('Click detected on:', e.target);
+            console.log('Event propagation stopped?', e.defaultPrevented);
+            console.log('Click coordinates:', e.clientX, e.clientY);
+        }, true); // Use capture phase
+        
+        // Test 2: Load the main page scripts and see what happens
+        function loadMainPageScripts() {
+            // Load scripts one by one to identify the problem
+            const scripts = [
+                '/js/i18n.js',
+                '/js/api.js', 
+                '/js/main.js'
+            ];
+            
+            let index = 0;
+            
+            function loadNext() {
+                if (index >= scripts.length) {
+                    console.log('All scripts loaded');
+                    testCategories();
+                    return;
+                }
+                
+                const script = document.createElement('script');
+                script.src = scripts[index];
+                script.onload = () => {
+                    console.log(`Loaded: ${scripts[index]}`);
+                    index++;
+                    setTimeout(loadNext, 1000);
+                };
+                script.onerror = () => {
+                    console.error(`Failed to load: ${scripts[index]}`);
+                    index++;
+                    loadNext();
+                };
+                document.head.appendChild(script);
+            }
+            
+            loadNext();
+        }
+        
+        function testCategories() {
+            const container = document.getElementById('test');
+            
+            // Create a simple clickable div
+            const testDiv = document.createElement('div');
+            testDiv.style.cssText = 'background: yellow; padding: 20px; margin: 20px; cursor: pointer;';
+            testDiv.textContent = 'Click me - I should work';
+            testDiv.onclick = () => alert('Simple div clicked!');
+            container.appendChild(testDiv);
+            
+            // Create a link
+            const testLink = document.createElement('a');
+            testLink.href = '#test';
+            testLink.style.cssText = 'display: block; background: lightblue; padding: 20px; margin: 20px;';
+            testLink.textContent = 'I am a link - click me';
+            testLink.onclick = (e) => {
+                e.preventDefault();
+                alert('Link clicked!');
+            };
+            container.appendChild(testLink);
+            
+            // Load actual categories
+            fetch('/api/categories')
+                .then(r => r.json())
+                .then(data => {
+                    if (data.categories) {
+                        data.categories.forEach(cat => {
+                            const catDiv = document.createElement('div');
+                            catDiv.style.cssText = 'background: lightgreen; padding: 20px; margin: 20px; cursor: pointer;';
+                            catDiv.textContent = `Category: ${cat.name}`;
+                            catDiv.onclick = () => alert(`Category clicked: ${cat.name}`);
+                            container.appendChild(catDiv);
+                        });
+                    }
+                });
+        }
+        
+        // Start with simple test
+        testCategories();
+        
+        // Then load main scripts after 2 seconds
+        setTimeout(() => {
+            console.log('Loading main page scripts...');
+            loadMainPageScripts();
+        }, 2000);
+    </script>
+</body>
+</html>

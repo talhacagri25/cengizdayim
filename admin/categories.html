@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kategori Yönetimi - Yönetim Paneli | Hayat Flora</title>
+    <meta name="description" content="Hayat Flora kategori yönetimi">
+    <link rel="stylesheet" href="/admin/css/admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Admin Layout -->
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-logo">🌿</span>
+                <h2 class="sidebar-title">Hayat Flora</h2>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <div class="nav-item">
+                    <a href="/admin/dashboard.html" class="nav-link">
+                        <span class="nav-icon">📊</span>
+                        <span class="nav-text">Ana Sayfa</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/admin/plants.html" class="nav-link">
+                        <span class="nav-icon">🌱</span>
+                        <span class="nav-text">Bitkiler</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/admin/orders.html" class="nav-link">
+                        <span class="nav-icon">📦</span>
+                        <span class="nav-text">Siparişler</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/admin/categories.html" class="nav-link active">
+                        <span class="nav-icon">📁</span>
+                        <span class="nav-text">Kategoriler</span>
+                    </a>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" id="mainContent">
+            <!-- Header -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+                    <h1 class="page-title">Kategoriler</h1>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-primary" onclick="categoriesManager.openAddModal()">
+                        <span>➕</span> Kategori Ekle
+                    </button>
+                    <div class="user-menu">
+                        <div class="user-avatar" id="userAvatar" onclick="categoriesManager.toggleUserMenu()">A</div>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-item" onclick="adminAuth.logout()">
+                                <span class="dropdown-icon">🚪</span>
+                                <span>Çıkış Yap</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h2 class="page-title">Kategori Yönetimi</h2>
+                    <p class="page-description">Daha iyi tarama için bitkilerinizi kategorilere ayırın</p>
+                </div>
+
+                <!-- Category Stats -->
+                <div class="category-stats-section">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: var(--primary-color);">📁</div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="totalCategories">0</div>
+                                <div class="stat-label">Toplam Kategori</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: var(--info-color);">🌱</div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="categorizedPlants">0</div>
+                                <div class="stat-label">Kategorili Bitkiler</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: var(--success-color);">✅</div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="activeCategories">0</div>
+                                <div class="stat-label">Aktif Kategoriler</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background: var(--warning-color);">📊</div>
+                            <div class="stat-content">
+                                <div class="stat-value" id="avgPlantsPerCategory">0</div>
+                                <div class="stat-label">Ort. Bitki/Kategori</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Search and Filter -->
+                <div class="categories-filters-section">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="filters-row">
+                                <div class="search-group">
+                                    <label class="form-label">Kategori Ara</label>
+                                    <div class="search-input">
+                                        <input type="text" id="searchInput" class="form-input" 
+                                               placeholder="Ad veya açıklama ile ara..." 
+                                               oninput="categoriesManager.handleSearch(this.value)">
+                                        <span class="search-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <div class="filter-actions">
+                                    <button class="btn btn-secondary" onclick="categoriesManager.clearSearch()">
+                                        Aramayı Temizle
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div class="categories-loading" id="categoriesLoading" style="display: none;">
+                    <div class="loading-spinner"></div>
+                    <p>Kategoriler yükleniyor...</p>
+                </div>
+
+                <!-- Categories Grid -->
+                <div class="categories-grid-section">
+                    <div class="section-header">
+                        <h3>Tüm Kategoriler</h3>
+                        <div class="section-actions">
+                            <button class="btn btn-secondary btn-sm" onclick="categoriesManager.refreshData()">
+                                🔄 Yenile
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="categories-grid" id="categoriesGrid">
+                        <!-- Categories will be loaded here -->
+                    </div>
+
+                    <!-- Empty State -->
+                    <div class="empty-state" id="emptyState" style="display: none;">
+                        <div class="empty-icon">📁</div>
+                        <h3>Kategori bulunamadı</h3>
+                        <p>Bitkilerinizi düzenlemek için ilk kategorinizi oluşturun</p>
+                        <button class="btn btn-primary" onclick="categoriesManager.openAddModal()">
+                            İlk Kategoriyi Ekle
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Category Add/Edit Modal -->
+    <div class="modal" id="categoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Yeni Kategori Ekle</h3>
+                <button class="modal-close" onclick="categoriesManager.closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm" class="category-form" novalidate>
+                    <input type="hidden" id="categoryId" name="id">
+                    
+                    <div class="form-group">
+                        <label for="categoryName" class="form-label">Kategori Adı *</label>
+                        <input type="text" id="categoryName" name="name" class="form-input" required 
+                               placeholder="Kategori adını girin">
+                        <div class="form-error" id="nameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryDescription" class="form-label">Açıklama</label>
+                        <textarea id="categoryDescription" name="description" class="form-textarea" 
+                                  rows="4" placeholder="Bu kategoriyi açıklayın..."></textarea>
+                        <div class="form-error" id="descriptionError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categorySlug" class="form-label">URL Kısaltması</label>
+                        <input type="text" id="categorySlug" name="slug" class="form-input" 
+                               placeholder="kategori-url-kisaltmasi">
+                        <small class="form-help">Addan otomatik oluşturmak için boş bırakın</small>
+                        <div class="form-error" id="slugError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryOrder" class="form-label">Görüntüleme Sırası</label>
+                        <input type="number" id="categoryOrder" name="display_order" class="form-input" 
+                               min="0" value="0" placeholder="0">
+                        <small class="form-help">Düşük sayılar önce görünür</small>
+                        <div class="form-error" id="orderError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="categoryActive" name="is_active" checked>
+                            <span class="checkmark"></span>
+                            Aktif Kategori
+                        </label>
+                        <small class="form-help">Pasif kategoriler müşterilerden gizlenir</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="categoriesManager.closeModal()">
+                    İptal
+                </button>
+                <button type="submit" form="categoryForm" class="btn btn-primary" id="saveBtn">
+                    <span class="btn-text">Kategoriyi Kaydet</span>
+                    <span class="btn-loader" style="display: none;"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Kategoriyi Sil</h3>
+                <button class="modal-close" onclick="categoriesManager.closeDeleteModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="delete-confirmation">
+                    <div class="delete-icon">⚠️</div>
+                    <h4>Emin misiniz?</h4>
+                    <p>Bu işlem geri alınamaz. Kategori kalıcı olarak silinecektir.</p>
+                    <div class="warning-message" id="deleteWarning">
+                        <!-- Warning message will be shown here -->
+                    </div>
+                    <div class="category-info" id="deleteItem">
+                        <!-- Category info will be shown here -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="categoriesManager.closeDeleteModal()">
+                    İptal
+                </button>
+                <button type="button" class="btn btn-danger" onclick="categoriesManager.confirmDelete()" id="deleteBtn">
+                    <span class="btn-text">Kategoriyi Sil</span>
+                    <span class="btn-loader" style="display: none;"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Styles -->
+    <style>
+        .category-stats-section {
+            margin-bottom: 2rem;
+        }
+
+        .categories-filters-section {
+            margin-bottom: 2rem;
+        }
+
+        .filters-row {
+            display: flex;
+            align-items: end;
+            gap: 2rem;
+        }
+
+        .search-group {
+            flex: 1;
+        }
+
+        .search-input {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+            border-color: var(--primary-color);
+        }
+
+        .category-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(45deg);
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-header::before {
+            right: -30%;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .category-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .category-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #2ecc71;
+        }
+
+        .status-dot.inactive {
+            background: #e74c3c;
+        }
+
+        .category-body {
+            padding: 1.5rem;
+        }
+
+        .category-description {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+            min-height: 50px;
+        }
+
+        .category-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-text {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            text-transform: uppercase;
+        }
+
+        .category-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--secondary-color);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        .categories-loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--secondary-color);
+        }
+
+        .delete-confirmation {
+            text-align: center;
+        }
+
+        .delete-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--warning-color);
+        }
+
+        .warning-message {
+            background: rgba(231, 76, 60, 0.1);
+            border: 1px solid rgba(231, 76, 60, 0.2);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: var(--danger-color);
+            font-size: 0.9rem;
+        }
+
+        .form-help {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-label .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .checkbox-label .checkmark::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: var(--white);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .checkbox-label input[type="checkbox"]:checked + .checkmark {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        @media (max-width: 768px) {
+            .filters-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 1rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .category-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <!-- Scripts -->
+    <script src="/admin/js/admin-auth.js"></script>
+    <script src="/admin/js/categories.js"></script>
+</body>
+</html>

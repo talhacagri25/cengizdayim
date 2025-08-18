@@ -1,0 +1,108 @@
+/* Fix to prevent navbar items from wrapping */
+.nav-brand {
+    white-space: nowrap;
+    display: inline-block;
+}
+
+/* Prevent nav menu from wrapping */
+.nav-menu {
+    white-space: nowrap !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.nav-menu::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ensure nav items stay in one line */
+.nav-item {
+    white-space: nowrap !important;
+    flex-shrink: 0;
+    padding: var(--space-2) var(--space-3) !important;
+}
+
+/* Adjust spacing for smaller screens */
+@media (max-width: 1200px) {
+    .nav-menu {
+        gap: var(--space-4) !important;
+    }
+    
+    .nav-item {
+        font-size: 0.95rem;
+        padding: var(--space-2) var(--space-2) !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .nav-menu {
+        gap: var(--space-3) !important;
+    }
+    
+    .nav-item {
+        font-size: 0.9rem;
+    }
+}
+
+/* Keep nav-menu visible on medium screens */
+@media (max-width: 968px) {
+    .nav-menu {
+        display: flex !important;
+        gap: var(--space-2) !important;
+    }
+    
+    .nav-item {
+        font-size: 0.85rem;
+        padding: var(--space-1) var(--space-2) !important;
+    }
+    
+    /* Adjust container for better space usage */
+    .nav-container {
+        gap: var(--space-4);
+    }
+}
+
+/* Only hide nav menu on very small mobile screens */
+@media (max-width: 640px) {
+    .nav-menu {
+        display: none !important;
+    }
+}
+
+/* Ensure navbar container uses space efficiently */
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 var(--space-6);
+}
+
+/* Compact language selector and cart button on smaller screens */
+@media (max-width: 1200px) {
+    .nav-actions {
+        gap: var(--space-2) !important;
+    }
+    
+    .language-selector {
+        min-width: auto !important;
+    }
+    
+    .lang-button {
+        padding: var(--space-2) !important;
+    }
+    
+    .lang-text {
+        display: none;
+    }
+    
+    .lang-arrow {
+        margin-left: 4px;
+    }
+}

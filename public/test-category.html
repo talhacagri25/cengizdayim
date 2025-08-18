@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .categories-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .category-box {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-box:hover {
+            background: #f0f0f0;
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .category-box h3 {
+            color: #333;
+            margin: 10px 0;
+        }
+        
+        .category-box p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <h1>Category Click Test</h1>
+    <div id="status">Loading categories...</div>
+    <div class="categories-container" id="categories"></div>
+
+    <script>
+        // Simple test to load and display categories
+        async function loadCategories() {
+            try {
+                const response = await fetch('/api/categories');
+                const data = await response.json();
+                
+                if (data.success && data.categories) {
+                    const container = document.getElementById('categories');
+                    container.innerHTML = '';
+                    
+                    data.categories.forEach(category => {
+                        // Method 1: Using onclick
+                        const card1 = document.createElement('div');
+                        card1.className = 'category-box';
+                        card1.onclick = () => {
+                            alert(`Clicked (onclick): ${category.name}`);
+                            window.location.href = `/shop.html?category=${encodeURIComponent(category.name)}`;
+                        };
+                        card1.innerHTML = `
+                            <h3>${category.name} (onclick)</h3>
+                            <p>${category.description || 'No description'}</p>
+                        `;
+                        container.appendChild(card1);
+                        
+                        // Method 2: Using anchor tag
+                        const link = document.createElement('a');
+                        link.href = `/shop.html?category=${encodeURIComponent(category.name)}`;
+                        link.innerHTML = `
+                            <div class="category-box">
+                                <h3>${category.name} (anchor)</h3>
+                                <p>${category.description || 'No description'}</p>
+                            </div>
+                        `;
+                        container.appendChild(link);
+                        
+                        // Method 3: Using addEventListener
+                        const card3 = document.createElement('div');
+                        card3.className = 'category-box';
+                        card3.innerHTML = `
+                            <h3>${category.name} (addEventListener)</h3>
+                            <p>${category.description || 'No description'}</p>
+                        `;
+                        card3.addEventListener('click', () => {
+                            alert(`Clicked (addEventListener): ${category.name}`);
+                            window.location.href = `/shop.html?category=${encodeURIComponent(category.name)}`;
+                        });
+                        container.appendChild(card3);
+                    });
+                    
+                    document.getElementById('status').textContent = 'Categories loaded. Try clicking each one:';
+                } else {
+                    document.getElementById('status').textContent = 'No categories found';
+                }
+            } catch (error) {
+                document.getElementById('status').textContent = 'Error loading categories: ' + error.message;
+                console.error('Error:', error);
+            }
+        }
+        
+        // Load categories on page load
+        loadCategories();
+    </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" data-i18n-title="Hayat Flora - Where Nature Meets Beauty">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hayat Flora - Where Nature Meets Beauty</title>
+    <meta name="description" content="Discover beautiful plants and flowers at Hayat Flora. Indoor plants, outdoor plants, succulents, and more with expert care advice.">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/nav-nowrap.css">
+    <link rel="stylesheet" href="/css/product-card-fix.css">
+    <link rel="stylesheet" href="/css/category-override.css">
+    <link rel="stylesheet" href="/css/category-emergency-fix.css">
+    <link rel="stylesheet" href="/css/category-shine.css">
+    <link rel="stylesheet" href="/css/clickability-fix.css">
+    <link rel="stylesheet" href="/css/footer-alignment-fix.css">
+                                <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">Hayat Flora</a>
+            
+            <div class="nav-menu">
+                <a href="#featured" class="nav-item" data-i18n="nav.featured">Featured</a>
+                <a href="#categories" class="nav-item" data-i18n="nav.categories">Categories</a>
+                <a href="/shop.html" class="nav-item" data-i18n="nav.shop">Shop</a>
+                <a href="#about" class="nav-item" data-i18n="nav.about">About</a>
+                <a href="#contact" class="nav-item" data-i18n="nav.contact">Contact</a>
+                <a href="/track-order.html" class="nav-item" data-i18n="nav.track_order">Sipariş Takip</a>
+            </div>
+            
+            <div class="nav-actions">
+                <div class="language-selector">
+                    <button class="lang-button" id="langButton">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span class="lang-text">TR</span>
+                        <span class="lang-arrow">▼</span>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown">
+                        <div class="lang-option" data-lang="tr">
+                            <span class="lang-flag">🇹🇷</span>
+                            <span class="lang-text">Türkçe</span>
+                        </div>
+                        <div class="lang-option" data-lang="az">
+                            <span class="lang-flag">🇦🇿</span>
+                            <span class="lang-text">Azərbaycan</span>
+                        </div>
+                        <div class="lang-option" data-lang="en">
+                            <span class="lang-flag">🇺🇸</span>
+                            <span class="lang-text">English</span>
+                        </div>
+                        <div class="lang-option" data-lang="ru">
+                            <span class="lang-flag">🇷🇺</span>
+                            <span class="lang-text">Русский</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="cart-button" onclick="window.location.href='/cart.html'">
+                    🛒
+                    <span class="cart-badge" id="cartCount">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Featured Plants Section - Seamless Flow -->
+    <section class="section" id="featured">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-i18n="featured.title">Featured Plants</h2>
+                <p class="section-subtitle" data-i18n="featured.subtitle">Hand-picked favorites that bring life and beauty to any space</p>
+            </div>
+            <div class="plants-grid" id="featuredPlants">
+                <!-- Featured plants will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section - Seamless Flow -->
+    <section class="section" id="categories">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-i18n="categories.title">Plant Categories</h2>
+                <p class="section-subtitle" data-i18n="categories.subtitle">Explore our diverse collection organized by plant type and care requirements</p>
+            </div>
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section - Layered Content -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-i18n="about.title">About Hayat Flora</h2>
+            </div>
+            <div class="about-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+                <div class="about-text animate-on-scroll">
+                    <p class="text-large" data-i18n="about.description1">Welcome to our enchanting world of flowers and plants. We specialize in creating stunning arrangements and providing healthy, beautiful plants for your home and garden.</p>
+                    <p data-i18n="about.description2">With years of expertise in horticulture and a passion for nature's beauty, we carefully select each plant to ensure it thrives in your care. From beginners to experienced gardeners, we have something special for everyone.</p>
+                    <a href="/shop.html" class="btn btn-primary btn-large" style="margin-top: 2rem;" data-i18n="about.explore_collection">Explore Our Collection</a>
+                </div>
+                <div class="about-features animate-on-scroll">
+                    <div class="features-grid" style="display: grid; gap: 2rem;">
+                        <div class="feature-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: var(--color-white); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); transition: all var(--transition-base);">
+                            <span class="feature-icon" style="font-size: 2.5rem; flex-shrink: 0;">🌱</span>
+                            <div>
+                                <h4 data-i18n="features.expert_care" style="margin-bottom: 0.5rem; color: var(--color-primary);">Expert Care Advice</h4>
+                                <p class="text-small text-muted" data-i18n="features.expert_care_desc">Detailed care instructions for every plant</p>
+                            </div>
+                        </div>
+                        <div class="feature-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: var(--color-white); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); transition: all var(--transition-base);">
+                            <span class="feature-icon" style="font-size: 2.5rem; flex-shrink: 0;">🚚</span>
+                            <div>
+                                <h4 data-i18n="features.fast_delivery" style="margin-bottom: 0.5rem; color: var(--color-primary);">Fast Delivery</h4>
+                                <p class="text-small text-muted" data-i18n="features.fast_delivery_desc">Same-day delivery available for local orders</p>
+                            </div>
+                        </div>
+                        <div class="feature-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: var(--color-white); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); transition: all var(--transition-base);">
+                            <span class="feature-icon" style="font-size: 2.5rem; flex-shrink: 0;">💚</span>
+                            <div>
+                                <h4 data-i18n="features.healthy_guarantee" style="margin-bottom: 0.5rem; color: var(--color-primary);">Healthy Guarantee</h4>
+                                <p class="text-small text-muted" data-i18n="features.healthy_guarantee_desc">All plants guaranteed healthy and thriving</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section - Clean & Modern -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title" data-i18n="contact.title">Visit Our Store</h2>
+                <p class="section-subtitle" data-i18n="contact.subtitle">Come see our plants in person and get expert advice from our team</p>
+            </div>
+            <div class="contact-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; margin-top: 4rem;">
+                <div class="contact-card animate-on-scroll" style="background: var(--color-white); padding: 2.5rem; border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); border: 1px solid var(--color-medium-gray);">
+                    <h3 style="color: var(--color-primary); margin-bottom: 2rem; font-size: var(--font-size-2xl);" data-i18n="contact.store_info">Store Information</h3>
+                    <div class="contact-items" style="display: grid; gap: 1.5rem;">
+                        <div class="contact-item" style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">📍</span>
+                            <div>
+                                <strong data-i18n="contact.address" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Address:</strong>
+                                <p style="color: var(--color-text-secondary); margin: 0;">Dudaklı Mah. Ankara Cad. No:360/1, Bursa</p>
+                            </div>
+                        </div>
+                        <div class="contact-item" style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">📞</span>
+                            <div>
+                                <strong data-i18n="contact.phone" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Phone:</strong>
+                                <p style="color: var(--color-text-secondary); margin: 0;">0544 818 68 25</p>
+                            </div>
+                        </div>
+                        <div class="contact-item" style="display: flex; align-items: center; gap: 1rem;">
+                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">📧</span>
+                            <div>
+                                <strong data-i18n="contact.email" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Email:</strong>
+                                <p style="color: var(--color-text-secondary); margin: 0;">info@hayatflora.net</p>
+                            </div>
+                        </div>
+                        <div class="contact-item" style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">🕒</span>
+                            <div>
+                                <strong data-i18n="contact.hours" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Hours:</strong>
+                                <p style="color: var(--color-text-secondary); margin: 0; line-height: 1.6;">Mon-Sat: 8:00 AM - 7:00 PM<br>Sun: 10:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="delivery-card animate-on-scroll" style="background: var(--color-white); padding: 2.5rem; border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); border: 1px solid var(--color-medium-gray);">
+                    <h3 style="color: var(--color-primary); margin-bottom: 2rem; font-size: var(--font-size-2xl);" data-i18n="contact.delivery_info">Delivery Information</h3>
+                    <div class="delivery-items" style="display: grid; gap: 1.5rem;">
+                        <div class="contact-item" style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">🚚</span>
+                            <div>
+                                <strong data-i18n="contact.free_delivery" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Free Delivery:</strong>
+                                <p data-i18n="contact.free_delivery_desc" style="color: var(--color-text-secondary); margin: 0;">Within 5 miles of our store</p>
+                            </div>
+                        </div>
+                        <div class="contact-item" style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">⏰</span>
+                            <div>
+                                <strong data-i18n="contact.same_day" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Same-Day Delivery:</strong>
+                                <p data-i18n="contact.same_day_desc" style="color: var(--color-text-secondary); margin: 0;">Available for orders placed before 2 PM</p>
+                            </div>
+                        </div>
+                        <div class="contact-item" style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">📦</span>
+                            <div>
+                                <strong data-i18n="contact.care_package" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Plant Care Package:</strong>
+                                <p data-i18n="contact.care_package_desc" style="color: var(--color-text-secondary); margin: 0;">Every delivery includes care instructions and plant food</p>
+                            </div>
+                        </div>
+                        <div class="contact-item" style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">🌱</span>
+                            <div>
+                                <strong data-i18n="contact.health_guarantee" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Plant Health Guarantee:</strong>
+                                <p data-i18n="contact.health_guarantee_desc" style="color: var(--color-text-secondary); margin: 0;">7-day guarantee on all delivered plants</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Hayat Flora</h3>
+                <p data-i18n="footer.tagline">Your trusted partner in bringing nature's beauty to your doorstep. Quality plants, expert care, exceptional service.</p>
+                <div style="margin-top: 1rem;">
+                    <span style="font-size: 1.5rem;">🌿 🌸 🌱</span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3 data-i18n="footer.quick_links">Quick Links</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.5rem;"><a href="/" style="color: white; text-decoration: none;" data-i18n="nav.home">Home</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="/shop.html" style="color: white; text-decoration: none;" data-i18n="nav.shop">Shop</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#categories" style="color: white; text-decoration: none;" data-i18n="nav.categories">Categories</a></li>
+                    <li style="margin-bottom: 0.5rem;"><a href="#about" style="color: white; text-decoration: none;" data-i18n="nav.about">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-i18n="footer.copyright">&copy; 2025 Hayat Flora. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/i18n.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/main.js"></script>
+    
+    <!-- Navigation Script -->
+    <script>
+        // Simple navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const langButton = document.getElementById('langButton');
+            const langDropdown = document.getElementById('langDropdown');
+            
+            // Language configuration
+            const langConfig = {
+                'tr': { flag: '🇹🇷', abbr: 'TR' },
+                'az': { flag: '🇦🇿', abbr: 'AZ' },
+                'en': { flag: '🇺🇸', abbr: 'EN' },
+                'ru': { flag: '🇷🇺', abbr: 'RU' }
+            };
+            
+            // Initialize language from localStorage
+            const savedLang = localStorage.getItem('florist_language') || 'tr';
+            if (langConfig[savedLang]) {
+                langButton.querySelector('.lang-flag').textContent = langConfig[savedLang].flag;
+                langButton.querySelector('.lang-text').textContent = langConfig[savedLang].abbr;
+            }
+            
+            // Toggle language dropdown
+            langButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                langDropdown.classList.toggle('open');
+                const arrow = langButton.querySelector('.lang-arrow');
+                arrow.style.transform = langDropdown.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function() {
+                langDropdown.classList.remove('open');
+                const arrow = langButton.querySelector('.lang-arrow');
+                arrow.style.transform = 'rotate(0deg)';
+            });
+            
+            // Handle language selection
+            const langOptions = document.querySelectorAll('.lang-option');
+            langOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    const config = langConfig[lang];
+                    
+                    if (config) {
+                        // Update button display
+                        langButton.querySelector('.lang-flag').textContent = config.flag;
+                        langButton.querySelector('.lang-text').textContent = config.abbr;
+                        
+                        // Save to localStorage
+                        localStorage.setItem('florist_language', lang);
+                    }
+                    
+                    // Close dropdown
+                    langDropdown.classList.remove('open');
+                    const arrow = langButton.querySelector('.lang-arrow');
+                    arrow.style.transform = 'rotate(0deg)';
+                    
+                    // Trigger language change if i18n is available
+                    if (window.i18n && window.i18n.setLanguage) {
+                        window.i18n.setLanguage(lang);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
