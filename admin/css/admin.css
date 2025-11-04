@@ -1,23 +1,24 @@
 /* Admin Panel Styles with Enhanced Animations */
 
 :root {
-    --primary-color: #2d5a27;
-    --primary-dark: #1a3d18;
-    --primary-light: #4a7c59;
-    --secondary-color: #67a573;
-    --accent-color: #27ae60;
+    /* Unified Color System - Matching Public Site */
+    --primary-color: #1e6b1e;
+    --primary-dark: #164816;
+    --primary-light: #2d8f2d;
+    --secondary-color: #6c757d;
+    --accent-color: #2d8f2d;
     --danger-color: #e74c3c;
     --warning-color: #f39c12;
     --info-color: #3498db;
-    --success-color: #27ae60;
-    --dark-color: #2c3e50;
-    --light-color: #ecf0f1;
+    --success-color: #2d8f2d;
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
     --white: #ffffff;
     --background-color: #f8fafc;
     --card-background: #ffffff;
-    --border-color: #e2e8f0;
-    --text-color: #334155;
-    --text-muted: #64748b;
+    --border-color: #e9ecef;
+    --text-color: #212529;
+    --text-muted: #6c757d;
     --shadow-light: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
     --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     --shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
