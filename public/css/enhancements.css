@@ -1,0 +1,573 @@
+/**
+ * HAYAT FLORA - CONSOLIDATED ENHANCEMENTS
+ * All UI enhancements and fixes consolidated into a single file
+ * Replaces: nav-nowrap.css, product-card-fix.css, footer-alignment-fix.css,
+ *           category-override.css, category-emergency-fix.css, category-shine.css,
+ *           clickability-fix.css
+ */
+
+/* =============================================
+   NAVIGATION ENHANCEMENTS
+   ============================================= */
+
+/* Prevent navbar items from wrapping on smaller screens */
+.nav-brand {
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.nav-menu {
+    white-space: nowrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.nav-menu::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-item {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: var(--space-2) var(--space-3);
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 var(--space-6);
+}
+
+/* Navigation responsive adjustments */
+@media (max-width: 1200px) {
+    .nav-menu {
+        gap: var(--space-4);
+    }
+
+    .nav-item {
+        font-size: 0.95rem;
+        padding: var(--space-2) var(--space-2);
+    }
+
+    .nav-actions {
+        gap: var(--space-2);
+    }
+
+    .language-selector {
+        min-width: auto;
+    }
+
+    .lang-button {
+        padding: var(--space-2);
+    }
+
+    .lang-text {
+        display: none;
+    }
+
+    .lang-arrow {
+        margin-left: 4px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .nav-menu {
+        gap: var(--space-3);
+    }
+
+    .nav-item {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 968px) {
+    .nav-menu {
+        display: flex;
+        gap: var(--space-2);
+    }
+
+    .nav-item {
+        font-size: 0.85rem;
+        padding: var(--space-1) var(--space-2);
+    }
+
+    .nav-container {
+        gap: var(--space-4);
+    }
+}
+
+@media (max-width: 640px) {
+    .nav-menu {
+        display: none;
+    }
+}
+
+/* =============================================
+   PRODUCT CARD ENHANCEMENTS
+   ============================================= */
+
+/* Consistent card layout using flexbox */
+.plant-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.plant-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1rem;
+}
+
+.plant-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.plant-name {
+    margin-bottom: 0.5rem;
+}
+
+.plant-price {
+    margin-bottom: 0.75rem;
+}
+
+.plant-description {
+    flex-grow: 1;
+    margin-bottom: 1rem;
+    min-height: 60px;
+}
+
+.plant-meta {
+    margin-bottom: 1rem;
+}
+
+/* Push actions to bottom and ensure alignment */
+.plant-actions {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.btn-view-details,
+.add-to-cart {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.95rem;
+}
+
+/* Grid layout for consistent card heights */
+.plants-grid,
+.recommended-products {
+    display: grid;
+    align-items: stretch;
+}
+
+.recommended-products .plant-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* List view adjustments */
+.plants-grid.list-view .plant-card {
+    display: flex;
+    flex-direction: row;
+}
+
+.plants-grid.list-view .plant-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+.plants-grid.list-view .plant-actions {
+    margin-top: 0;
+    margin-left: auto;
+    border-top: none;
+    padding-top: 0;
+    align-self: center;
+}
+
+@media (max-width: 768px) {
+    .btn-view-details,
+    .add-to-cart {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+}
+
+/* =============================================
+   FOOTER ENHANCEMENTS
+   ============================================= */
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.footer-section {
+    flex: 0 1 auto;
+    text-align: center;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.footer-section p {
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.footer-section ul {
+    text-align: center;
+    padding: 0;
+}
+
+.footer-section ul li {
+    text-align: center;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-bottom p {
+    margin: 0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .footer-section {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+/* =============================================
+   CATEGORY CARD ENHANCEMENTS
+   ============================================= */
+
+/* Clickable category cards with proper z-index */
+#categories {
+    position: relative;
+    z-index: 10;
+}
+
+#categoriesGrid {
+    position: relative;
+    z-index: 11;
+}
+
+#categoriesGrid > * {
+    position: relative;
+    z-index: 12;
+    pointer-events: auto;
+}
+
+#categoriesGrid a {
+    display: block;
+    position: relative;
+    z-index: 13;
+    pointer-events: auto;
+    text-decoration: none;
+    color: inherit;
+}
+
+#categoriesGrid a > div {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(255, 255, 255, 0.95) 100%
+    );
+    pointer-events: none;
+}
+
+/* Category card shine animation */
+@keyframes categoryShine {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+@keyframes categoryGlow {
+    0%, 100% {
+        box-shadow:
+            0 4px 6px rgba(0, 0, 0, 0.1),
+            0 0 20px rgba(45, 90, 39, 0);
+    }
+    50% {
+        box-shadow:
+            0 12px 24px rgba(0, 0, 0, 0.15),
+            0 0 30px rgba(45, 90, 39, 0.3);
+    }
+}
+
+/* Shine overlay effect */
+#categoriesGrid a > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -200%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    pointer-events: none;
+    z-index: 1;
+    transition: none;
+}
+
+#categoriesGrid a:hover > div::before {
+    animation: categoryShine 0.8s ease-in-out;
+}
+
+#categoriesGrid a:hover > div {
+    animation: categoryGlow 1.5s ease-in-out infinite;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(245, 255, 245, 1) 100%
+    );
+}
+
+/* Green accent border on hover */
+#categoriesGrid a > div::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    padding: 2px;
+    background: linear-gradient(
+        45deg,
+        #2d5a27,
+        #67a573,
+        #2d5a27
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+#categoriesGrid a:hover > div::after {
+    opacity: 0.6;
+}
+
+/* Ensure content stays above effects */
+#categoriesGrid a > div > * {
+    position: relative;
+    z-index: 3;
+}
+
+/* Icon bounce animation on hover */
+@keyframes iconBounce {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.1);
+    }
+}
+
+#categoriesGrid a:hover > div > div:first-child {
+    animation: iconBounce 0.6s ease-in-out;
+}
+
+#categoriesGrid a > div span:last-child {
+    transition: all 0.3s ease;
+}
+
+#categoriesGrid a:hover > div span:last-child {
+    color: #2d5a27;
+    font-weight: 700;
+    transform: translateX(5px);
+}
+
+/* =============================================
+   Z-INDEX & CLICKABILITY MANAGEMENT
+   ============================================= */
+
+/* Fix z-index stacking for main sections */
+.section {
+    position: relative;
+    z-index: 1;
+}
+
+#featured {
+    position: relative;
+    z-index: 100;
+}
+
+#featuredPlants,
+.plants-grid {
+    position: relative;
+    z-index: 101;
+}
+
+.plant-card {
+    position: relative;
+    z-index: 102;
+    pointer-events: auto;
+    transform: translateZ(0); /* Create new stacking context */
+}
+
+.plant-card:hover {
+    z-index: 105;
+}
+
+.plant-card a,
+.plant-card button,
+.plant-card .card-actions {
+    position: relative;
+    z-index: 103;
+    pointer-events: auto;
+}
+
+/* Navigation z-index */
+.navbar {
+    position: relative;
+    z-index: 9999;
+}
+
+.nav-menu a,
+.nav-actions button,
+.language-selector,
+.cart-button {
+    position: relative;
+    z-index: 10000;
+    pointer-events: auto;
+}
+
+.lang-dropdown {
+    position: absolute;
+    z-index: 10001;
+    pointer-events: auto;
+}
+
+/* Other sections */
+#about {
+    position: relative;
+    z-index: 200;
+}
+
+#about .btn {
+    position: relative;
+    z-index: 201;
+    pointer-events: auto;
+}
+
+#contact {
+    position: relative;
+    z-index: 300;
+}
+
+.footer {
+    position: relative;
+    z-index: 400;
+}
+
+.footer a {
+    position: relative;
+    z-index: 401;
+    pointer-events: auto;
+}
+
+/* Disable pointer events on decorative elements */
+.parallax-bg,
+.parallax-section::before,
+.parallax-section::after,
+.section::before,
+.section::after,
+.hero-particles,
+.particle,
+.floating-element {
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Ensure all links and buttons are clickable */
+a:not([disabled]),
+button:not([disabled]) {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+/* Override any transform issues on interactive elements */
+a, button, .clickable {
+    transform-style: preserve-3d;
+}
+
+/* Fix for animated elements */
+.animated,
+.animate-on-scroll {
+    pointer-events: none;
+}
+
+.animated > *,
+.animate-on-scroll > * {
+    pointer-events: auto;
+}
+
+/* Animation toggle button */
+#animationToggle {
+    position: fixed;
+    z-index: 15000;
+    pointer-events: auto;
+}
+
+.scroll-progress {
+    pointer-events: none;
+}

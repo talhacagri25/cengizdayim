@@ -6,16 +6,8 @@
     <title>Hayat Flora - Where Nature Meets Beauty</title>
     <meta name="description" content="Discover beautiful plants and flowers at Hayat Flora. Indoor plants, outdoor plants, succulents, and more with expert care advice.">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/nav-nowrap.css">
-    <link rel="stylesheet" href="/css/product-card-fix.css">
-    <link rel="stylesheet" href="/css/category-override.css">
-    <link rel="stylesheet" href="/css/category-emergency-fix.css">
-    <link rel="stylesheet" href="/css/category-shine.css">
-    <link rel="stylesheet" href="/css/clickability-fix.css">
-    <link rel="stylesheet" href="/css/footer-alignment-fix.css">
-                                <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/enhancements.css">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -104,32 +96,32 @@
             <div class="section-header animate-on-scroll">
                 <h2 class="section-title" data-i18n="about.title">About Hayat Flora</h2>
             </div>
-            <div class="about-content" style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+            <div class="about-content">
                 <div class="about-text animate-on-scroll">
                     <p class="text-large" data-i18n="about.description1">Welcome to our enchanting world of flowers and plants. We specialize in creating stunning arrangements and providing healthy, beautiful plants for your home and garden.</p>
                     <p data-i18n="about.description2">With years of expertise in horticulture and a passion for nature's beauty, we carefully select each plant to ensure it thrives in your care. From beginners to experienced gardeners, we have something special for everyone.</p>
-                    <a href="/shop.html" class="btn btn-primary btn-large" style="margin-top: 2rem;" data-i18n="about.explore_collection">Explore Our Collection</a>
+                    <a href="/shop.html" class="btn btn-primary btn-large" data-i18n="about.explore_collection">Explore Our Collection</a>
                 </div>
                 <div class="about-features animate-on-scroll">
-                    <div class="features-grid" style="display: grid; gap: 2rem;">
-                        <div class="feature-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: var(--color-white); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); transition: all var(--transition-base);">
-                            <span class="feature-icon" style="font-size: 2.5rem; flex-shrink: 0;">🌱</span>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <span class="feature-icon">🌱</span>
                             <div>
-                                <h4 data-i18n="features.expert_care" style="margin-bottom: 0.5rem; color: var(--color-primary);">Expert Care Advice</h4>
+                                <h4 data-i18n="features.expert_care">Expert Care Advice</h4>
                                 <p class="text-small text-muted" data-i18n="features.expert_care_desc">Detailed care instructions for every plant</p>
                             </div>
                         </div>
-                        <div class="feature-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: var(--color-white); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); transition: all var(--transition-base);">
-                            <span class="feature-icon" style="font-size: 2.5rem; flex-shrink: 0;">🚚</span>
+                        <div class="feature-item">
+                            <span class="feature-icon">🚚</span>
                             <div>
-                                <h4 data-i18n="features.fast_delivery" style="margin-bottom: 0.5rem; color: var(--color-primary);">Fast Delivery</h4>
+                                <h4 data-i18n="features.fast_delivery">Fast Delivery</h4>
                                 <p class="text-small text-muted" data-i18n="features.fast_delivery_desc">Same-day delivery available for local orders</p>
                             </div>
                         </div>
-                        <div class="feature-item" style="display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: var(--color-white); border-radius: var(--radius-xl); box-shadow: var(--shadow-sm); transition: all var(--transition-base);">
-                            <span class="feature-icon" style="font-size: 2.5rem; flex-shrink: 0;">💚</span>
+                        <div class="feature-item">
+                            <span class="feature-icon">💚</span>
                             <div>
-                                <h4 data-i18n="features.healthy_guarantee" style="margin-bottom: 0.5rem; color: var(--color-primary);">Healthy Guarantee</h4>
+                                <h4 data-i18n="features.healthy_guarantee">Healthy Guarantee</h4>
                                 <p class="text-small text-muted" data-i18n="features.healthy_guarantee_desc">All plants guaranteed healthy and thriving</p>
                             </div>
                         </div>
@@ -146,69 +138,69 @@
                 <h2 class="section-title" data-i18n="contact.title">Visit Our Store</h2>
                 <p class="section-subtitle" data-i18n="contact.subtitle">Come see our plants in person and get expert advice from our team</p>
             </div>
-            <div class="contact-content" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 4rem; margin-top: 4rem;">
-                <div class="contact-card animate-on-scroll" style="background: var(--color-white); padding: 2.5rem; border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); border: 1px solid var(--color-medium-gray);">
-                    <h3 style="color: var(--color-primary); margin-bottom: 2rem; font-size: var(--font-size-2xl);" data-i18n="contact.store_info">Store Information</h3>
-                    <div class="contact-items" style="display: grid; gap: 1.5rem;">
-                        <div class="contact-item" style="display: flex; align-items: center; gap: 1rem;">
-                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">📍</span>
+            <div class="contact-content">
+                <div class="contact-card animate-on-scroll">
+                    <h3 data-i18n="contact.store_info">Store Information</h3>
+                    <div class="contact-items">
+                        <div class="contact-item">
+                            <span>📍</span>
                             <div>
-                                <strong data-i18n="contact.address" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Address:</strong>
-                                <p style="color: var(--color-text-secondary); margin: 0;">Dudaklı Mah. Ankara Cad. No:360/1, Bursa</p>
+                                <strong data-i18n="contact.address">Address:</strong>
+                                <p>Dudaklı Mah. Ankara Cad. No:360/1, Bursa</p>
                             </div>
                         </div>
-                        <div class="contact-item" style="display: flex; align-items: center; gap: 1rem;">
-                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">📞</span>
+                        <div class="contact-item">
+                            <span>📞</span>
                             <div>
-                                <strong data-i18n="contact.phone" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Phone:</strong>
-                                <p style="color: var(--color-text-secondary); margin: 0;">0544 818 68 25</p>
+                                <strong data-i18n="contact.phone">Phone:</strong>
+                                <p>0544 818 68 25</p>
                             </div>
                         </div>
-                        <div class="contact-item" style="display: flex; align-items: center; gap: 1rem;">
-                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">📧</span>
+                        <div class="contact-item">
+                            <span>📧</span>
                             <div>
-                                <strong data-i18n="contact.email" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Email:</strong>
-                                <p style="color: var(--color-text-secondary); margin: 0;">info@hayatflora.net</p>
+                                <strong data-i18n="contact.email">Email:</strong>
+                                <p>info@hayatflora.net</p>
                             </div>
                         </div>
-                        <div class="contact-item" style="display: flex; align-items: flex-start; gap: 1rem;">
-                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">🕒</span>
+                        <div class="contact-item">
+                            <span>🕒</span>
                             <div>
-                                <strong data-i18n="contact.hours" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Hours:</strong>
-                                <p style="color: var(--color-text-secondary); margin: 0; line-height: 1.6;">Mon-Sat: 8:00 AM - 7:00 PM<br>Sun: 10:00 AM - 5:00 PM</p>
+                                <strong data-i18n="contact.hours">Hours:</strong>
+                                <p>Mon-Sat: 8:00 AM - 7:00 PM<br>Sun: 10:00 AM - 5:00 PM</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="delivery-card animate-on-scroll" style="background: var(--color-white); padding: 2.5rem; border-radius: var(--radius-2xl); box-shadow: var(--shadow-lg); border: 1px solid var(--color-medium-gray);">
-                    <h3 style="color: var(--color-primary); margin-bottom: 2rem; font-size: var(--font-size-2xl);" data-i18n="contact.delivery_info">Delivery Information</h3>
-                    <div class="delivery-items" style="display: grid; gap: 1.5rem;">
-                        <div class="contact-item" style="display: flex; align-items: flex-start; gap: 1rem;">
-                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">🚚</span>
+                <div class="delivery-card animate-on-scroll">
+                    <h3 data-i18n="contact.delivery_info">Delivery Information</h3>
+                    <div class="delivery-items">
+                        <div class="contact-item">
+                            <span>🚚</span>
                             <div>
-                                <strong data-i18n="contact.free_delivery" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Free Delivery:</strong>
-                                <p data-i18n="contact.free_delivery_desc" style="color: var(--color-text-secondary); margin: 0;">Within 5 miles of our store</p>
+                                <strong data-i18n="contact.free_delivery">Free Delivery:</strong>
+                                <p data-i18n="contact.free_delivery_desc">Within 5 miles of our store</p>
                             </div>
                         </div>
-                        <div class="contact-item" style="display: flex; align-items: flex-start; gap: 1rem;">
-                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">⏰</span>
+                        <div class="contact-item">
+                            <span>⏰</span>
                             <div>
-                                <strong data-i18n="contact.same_day" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Same-Day Delivery:</strong>
-                                <p data-i18n="contact.same_day_desc" style="color: var(--color-text-secondary); margin: 0;">Available for orders placed before 2 PM</p>
+                                <strong data-i18n="contact.same_day">Same-Day Delivery:</strong>
+                                <p data-i18n="contact.same_day_desc">Available for orders placed before 2 PM</p>
                             </div>
                         </div>
-                        <div class="contact-item" style="display: flex; align-items: flex-start; gap: 1rem;">
-                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">📦</span>
+                        <div class="contact-item">
+                            <span>📦</span>
                             <div>
-                                <strong data-i18n="contact.care_package" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Plant Care Package:</strong>
-                                <p data-i18n="contact.care_package_desc" style="color: var(--color-text-secondary); margin: 0;">Every delivery includes care instructions and plant food</p>
+                                <strong data-i18n="contact.care_package">Plant Care Package:</strong>
+                                <p data-i18n="contact.care_package_desc">Every delivery includes care instructions and plant food</p>
                             </div>
                         </div>
-                        <div class="contact-item" style="display: flex; align-items: flex-start; gap: 1rem;">
-                            <span style="font-size: 1.5rem; width: 2.5rem; text-align: center;">🌱</span>
+                        <div class="contact-item">
+                            <span>🌱</span>
                             <div>
-                                <strong data-i18n="contact.health_guarantee" style="color: var(--color-text-primary); display: block; margin-bottom: 0.25rem;">Plant Health Guarantee:</strong>
-                                <p data-i18n="contact.health_guarantee_desc" style="color: var(--color-text-secondary); margin: 0;">7-day guarantee on all delivered plants</p>
+                                <strong data-i18n="contact.health_guarantee">Plant Health Guarantee:</strong>
+                                <p data-i18n="contact.health_guarantee_desc">7-day guarantee on all delivered plants</p>
                             </div>
                         </div>
                     </div>
@@ -245,73 +237,7 @@
     <!-- Scripts -->
     <script src="/js/i18n.js"></script>
     <script src="/js/api.js"></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/main.js"></script>
-    
-    <!-- Navigation Script -->
-    <script>
-        // Simple navigation functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const langButton = document.getElementById('langButton');
-            const langDropdown = document.getElementById('langDropdown');
-            
-            // Language configuration
-            const langConfig = {
-                'tr': { flag: '🇹🇷', abbr: 'TR' },
-                'az': { flag: '🇦🇿', abbr: 'AZ' },
-                'en': { flag: '🇺🇸', abbr: 'EN' },
-                'ru': { flag: '🇷🇺', abbr: 'RU' }
-            };
-            
-            // Initialize language from localStorage
-            const savedLang = localStorage.getItem('florist_language') || 'tr';
-            if (langConfig[savedLang]) {
-                langButton.querySelector('.lang-flag').textContent = langConfig[savedLang].flag;
-                langButton.querySelector('.lang-text').textContent = langConfig[savedLang].abbr;
-            }
-            
-            // Toggle language dropdown
-            langButton.addEventListener('click', function(e) {
-                e.stopPropagation();
-                langDropdown.classList.toggle('open');
-                const arrow = langButton.querySelector('.lang-arrow');
-                arrow.style.transform = langDropdown.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function() {
-                langDropdown.classList.remove('open');
-                const arrow = langButton.querySelector('.lang-arrow');
-                arrow.style.transform = 'rotate(0deg)';
-            });
-            
-            // Handle language selection
-            const langOptions = document.querySelectorAll('.lang-option');
-            langOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.dataset.lang;
-                    const config = langConfig[lang];
-                    
-                    if (config) {
-                        // Update button display
-                        langButton.querySelector('.lang-flag').textContent = config.flag;
-                        langButton.querySelector('.lang-text').textContent = config.abbr;
-                        
-                        // Save to localStorage
-                        localStorage.setItem('florist_language', lang);
-                    }
-                    
-                    // Close dropdown
-                    langDropdown.classList.remove('open');
-                    const arrow = langButton.querySelector('.lang-arrow');
-                    arrow.style.transform = 'rotate(0deg)';
-                    
-                    // Trigger language change if i18n is available
-                    if (window.i18n && window.i18n.setLanguage) {
-                        window.i18n.setLanguage(lang);
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>

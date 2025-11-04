@@ -1,16 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" data-i18n-title="Plant Details - Bloom & Blossom Florist">
+<html lang="en" data-i18n-title="Plant Details - Hayat Flora">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Details - Bloom & Blossom Florist</title>
+    <title>Plant Details - Hayat Flora</title>
     <meta name="description" content="View detailed information about our beautiful plants including care instructions, pricing, and customer reviews.">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/product.css">
-    <link rel="stylesheet" href="/css/footer-alignment-fix.css">
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/enhancements.css">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -196,73 +194,8 @@
     <!-- Scripts -->
     <script src="/js/i18n.js"></script>
     <script src="/js/api.js"></script>
+    <script src="/js/navigation.js"></script>
     <script src="/js/product.js"></script>
     
-    <!-- Navigation Script -->
-    <script>
-        // Simple navigation functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const langButton = document.getElementById('langButton');
-            const langDropdown = document.getElementById('langDropdown');
-            
-            // Language configuration
-            const langConfig = {
-                'tr': { flag: '🇹🇷', abbr: 'TR' },
-                'az': { flag: '🇦🇿', abbr: 'AZ' },
-                'en': { flag: '🇺🇸', abbr: 'EN' },
-                'ru': { flag: '🇷🇺', abbr: 'RU' }
-            };
-            
-            // Initialize language from localStorage
-            const savedLang = localStorage.getItem('florist_language') || 'tr';
-            if (langConfig[savedLang]) {
-                langButton.querySelector('.lang-flag').textContent = langConfig[savedLang].flag;
-                langButton.querySelector('.lang-text').textContent = langConfig[savedLang].abbr;
-            }
-            
-            // Toggle language dropdown
-            langButton.addEventListener('click', function(e) {
-                e.stopPropagation();
-                langDropdown.classList.toggle('open');
-                const arrow = langButton.querySelector('.lang-arrow');
-                arrow.style.transform = langDropdown.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
-            });
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function() {
-                langDropdown.classList.remove('open');
-                const arrow = langButton.querySelector('.lang-arrow');
-                arrow.style.transform = 'rotate(0deg)';
-            });
-            
-            // Handle language selection
-            const langOptions = document.querySelectorAll('.lang-option');
-            langOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    const lang = this.dataset.lang;
-                    const config = langConfig[lang];
-                    
-                    if (config) {
-                        // Update button display
-                        langButton.querySelector('.lang-flag').textContent = config.flag;
-                        langButton.querySelector('.lang-text').textContent = config.abbr;
-                        
-                        // Save to localStorage
-                        localStorage.setItem('florist_language', lang);
-                    }
-                    
-                    // Close dropdown
-                    langDropdown.classList.remove('open');
-                    const arrow = langButton.querySelector('.lang-arrow');
-                    arrow.style.transform = 'rotate(0deg)';
-                    
-                    // Trigger language change if i18n is available
-                    if (window.i18n && window.i18n.setLanguage) {
-                        window.i18n.setLanguage(lang);
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
